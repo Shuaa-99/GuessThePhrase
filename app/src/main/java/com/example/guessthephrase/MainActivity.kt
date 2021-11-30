@@ -68,10 +68,11 @@ class MainActivity : AppCompatActivity() {
                 i++
             }
             guesses.add("Found $numberofocuurance $userletter (s)")
+            guesses.add("${--count} attempts left")
             checkPhrase()
             userinput.text = null
         } else {
-            guesses.add(" wrong Guess :(")
+            guesses.add(" wrong Guess :( try again")
             guesses.add("${--count} attempts left")
             userinput.text = null
             if (count == 0 ) {
