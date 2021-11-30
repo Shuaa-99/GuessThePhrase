@@ -27,13 +27,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedPreferences = this.getSharedPreferences(
-            getString(R.string.preference_file_key), Context.MODE_PRIVATE
-        )
-        highscore = sharedPreferences.getInt("highscore", 0)
+            getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        highscore = sharedPreferences.getInt("HighScore", 0)
         phrase = "CodingDojo"
         codedphrase = "*".repeat(phrase.length).toCharArray()
         displayphrase = findViewById(R.id.tvInstructions)
         tvHS = findViewById(R.id.tvHS)
+        tvHS.text = "High Score: $highscore"
         userinput = findViewById(R.id.editTxt)
         guesses = arrayListOf()
         button = findViewById(R.id.bttn_click)
@@ -73,8 +73,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             guesses.add(" wrong Guess :(")
             guesses.add("${--count} attempts left")
-            score++
-            save()
             userinput.text = null
             if (count == 0 ) {
                 guesses.add("GAME OVER")
@@ -93,8 +91,8 @@ class MainActivity : AppCompatActivity() {
     fun checkPhrase() {
         if (String(codedphrase) == phrase) {
             guesses.add(("Great, you win :)"))
-            guesses.add("GAME OVER ")
             save()
+            guesses.add("GAME OVER ")
             userinput.text = null
             userinput.isEnabled = false
             button.isEnabled = false
@@ -105,10 +103,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun save() {
-        if (score < highscore) {
+        score = 10 - count
+        if(score >= highscore){
+            highscore = score
             with(sharedPreferences.edit()) {
-                putInt("highscore", score)
-               tvHS.text = ("highscore $score")
+                putInt("HighScore", highscore)
+                tvHS.text = "$highscore"
                 apply()
             }
         }
