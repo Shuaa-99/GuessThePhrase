@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MainActivity : AppCompatActivity() {
     lateinit var phrase: String
     lateinit var displayphrase: TextView
+    lateinit var tvHS : TextView
     lateinit var userinput: EditText
     lateinit var codedphrase: CharArray
     lateinit var myRV: RecyclerView
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         phrase = "CodingDojo"
         codedphrase = "*".repeat(phrase.length).toCharArray()
         displayphrase = findViewById(R.id.tvInstructions)
-        userinput = findViewById(R.id.editTextTextPersonName)
+        tvHS = findViewById(R.id.tvHS)
+        userinput = findViewById(R.id.editTxt)
         guesses = arrayListOf()
         button = findViewById(R.id.bttn_click)
         myRV = findViewById(R.id.rvGuesses)
@@ -106,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         if (score < highscore) {
             with(sharedPreferences.edit()) {
                 putInt("highscore", score)
-                displayphrase.text = score.toString()
+               tvHS.text = ("highscore $score")
                 apply()
             }
         }
