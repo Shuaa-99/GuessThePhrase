@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
             }
             guesses.add("Found $numberofocuurance $userletter (s)")
             guesses.add("${--count} attempts left")
+            save()
             checkPhrase()
             userinput.text = null
         } else {
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity() {
             highscore = score
             with(sharedPreferences.edit()) {
                 putInt("HighScore", highscore)
-                tvHS.text = "$highscore"
+               tvHS.text = "$highscore"
                 apply()
             }
         }
